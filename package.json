@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "[ -z \"$HUSKY\" ] && husky install .husky || echo \"ignore husky\"",
+    "postinstall": "[ -z \"$HUSKY\" ] && husky install .husky || echo \"ignore husky\" && yarn generate:projects",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write '**/*.{ts,tsx}'",
-    "type-check": "tsc --pretty --noEmit"
+    "type-check": "tsc --pretty --noEmit",
+    "generate:projects": "tsc scripts/projects.ts --outDir .temp && node .temp/scripts/projects.js"
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
@@ -27,12 +28,15 @@
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.9.3"
+    "typescript": "4.9.3",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
+    "pexels": "^1.4.0",
     "prettier": "^2.8.0"
   }
 }
