@@ -17,3 +17,9 @@ export const getQueryParamsArray = (
   if (!queryParams) return [];
   return Array.isArray(queryParams) ? queryParams : [queryParams];
 };
+
+export const getClientQueryParams = (
+  URLQuery: string | Array<string> | undefined,
+): string => {
+  return Array.isArray(URLQuery) ? URLQuery[0] : URLQuery ?? '';
+};

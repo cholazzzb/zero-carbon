@@ -18,6 +18,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({}) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: 'rgba(255,255,255,0.9)',
+        boxShadow: '0px 16px 40px rgba(117,142,254,0.2)',
       }}>
       <Center css={{ paddingInlineStart: '30px' }}>
         <Image src={Icon} width={70} height={15} alt="icon" />

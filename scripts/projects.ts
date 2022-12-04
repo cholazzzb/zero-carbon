@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 
-import { Category } from '../src/domain/projects/entity';
+import { Category, Project } from '../src/domain/projects/entity';
 import { generateImageURLs, generateProjectsData } from './generator';
 
 const numOfData = 25;
@@ -23,8 +23,21 @@ const main = async () => {
     images,
     maxImageInProject,
   );
+  const flattenProjectsData = Object.values(projectsData).reduce(
+    (acc, data) => {
+      data.data.forEach((d) => {
+        acc[d.id] = d;
+      });
+      return acc;
+    },
+    {} as Record<string, Project>,
+  );
   mkdirSync('public/generated', { recursive: true });
   writeFileSync('public/generated/projects.json', JSON.stringify(projectsData));
+  writeFileSync(
+    'public/generated/projects_flatten.json',
+    JSON.stringify(flattenProjectsData),
+  );
 };
 
 main();

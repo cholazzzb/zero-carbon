@@ -4,8 +4,8 @@ import { createClient } from 'pexels';
 
 import { Category, Project } from '../src/domain/projects/entity';
 
-const projectDir = process.cwd()
-const env = loadEnvConfig(projectDir)
+const projectDir = process.cwd();
+const env = loadEnvConfig(projectDir);
 const pexelsClient = createClient(env.combinedEnv.PEXEL_API_KEY ?? '');
 const query = 'Nature';
 const pexelsLimit = 50; // limit 50 images/page
@@ -24,7 +24,7 @@ export const generateImageURLs = async (
         .search({ query, size: 'small', page: idx + 1, per_page: numOfPages })
         .then((photos) => {
           if ('error' in photos) {
-            throw Error('error when fetching pexels image');
+            throw new Error('error when fetching pexels image');
           }
 
           photos.photos.forEach((element) => {
@@ -66,8 +66,8 @@ export const generateProjectsData = async (
           name: `${faker.address.cityName()} ${faker.commerce.productAdjective()} Forest Restoration`,
           location: faker.address.cityName(),
           startYear: faker.date.future().getFullYear().toString(),
-          overview: faker.lorem.lines(2),
-          impact: faker.lorem.lines(2),
+          overview: faker.lorem.lines(4),
+          impact: faker.lorem.lines(4),
           images: Array(1 + Math.round(Math.random() * (maxImageInProject - 1)))
             .fill(null)
             .map((_, imageIdx) => {
