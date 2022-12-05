@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { FunctionComponent, useState } from 'react';
+import { generateImage } from 'src/shared/image';
 import { Flex } from '../components/common';
 import { mainStiches } from '../themes';
 
@@ -18,6 +19,8 @@ const ImageCollection: FunctionComponent<ImageCollectionProps> = (props) => {
       <Image
         src={props.images[imageIdx]}
         alt={`image-${props.images[imageIdx]}`}
+        placeholder="blur"
+        blurDataURL={generateImage(560, 300)}
         width={560}
         height={300}
       />
@@ -27,6 +30,8 @@ const ImageCollection: FunctionComponent<ImageCollectionProps> = (props) => {
             <Image
               src={imageURL}
               alt={`image-${imageURL}`}
+              placeholder="blur"
+              blurDataURL={generateImage(80, 80)}
               width={80}
               height={80}
             />
@@ -46,4 +51,7 @@ const Row = mainStiches.styled(Flex, {
 const ImageContainer = mainStiches.styled(Flex, {
   marginInlineEnd: '10px',
   cursor: 'pointer',
+  '&:hover': {
+    opacity: 0.9,
+  },
 });
